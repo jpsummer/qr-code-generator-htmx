@@ -31,3 +31,6 @@ static/output.css
 
 # Templ
 *_templ.go
+
+# Air
+tmp/
