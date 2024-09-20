@@ -25,3 +25,9 @@
 go.work
 
 # End of https://www.toptal.com/developers/gitignore/api/go
+
+# Tailwind Output
+static/output.css
+
+# Templ
+*_templ.go
