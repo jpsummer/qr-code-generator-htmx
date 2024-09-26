@@ -4,50 +4,34 @@ import "github.com/jpsummer/qr-code-generator-htmx/views/components"
 
 templ Index() {
 	<!DOCTYPE html>
-	<html lang="en">
+	<html lang="en" class="dark">
 		@components.Header()
-		<body>
-			<main class="min-h-screen w-full">
-				<nav class="flex w-full border border-b-zinc-200 px-4 py-4">
-					<h3 class="text-base lg:text-lg font-medium text-center">
-						QR Code Generator
-					</h3>
-				</nav>
-				<div class="mt-6 w-full flex justify-center items-center flex-col">
-					// FORM PROCESSING
-					<form
-						hx-post="/"
-						hx-trigger="submit"
-						hx-swap="none"
-						onsubmit="reloadPage()"
-						class="w-96"
-					>
-						<textarea
-							name="description"
-							cols="30"
-							rows="2"
-							class="w-full border rounded-lg mb-2 p-4"
-							placeholder="Input todo details"
-							required
-						></textarea>
-						<button
-							class="py-1 px-4 w-full h-10 rounded-lg text-white bg-zinc-800"
-						>
-							Create
-						</button>
-					</form>
-					<section class="border-t border-t-zinc-200 mt-6 px-2 py-4 w-96">
-						<p>Hello World</p>
+		<body class="dark:bg-slate-800">
+			<main class="min-h-screen h-0 w-full overflow-hidden">
+				@components.Nav()
+				<div class="my-6 h-4/5 flex flex-col items-center justify-center">
+					<section class="grow flex flex-col items-center justify-start p-4 w-3/5 border rounded-lg bg-gray-100 border-gray-800 dark:border-zinc-500 dark:bg-slate-700 drop-shadow-lg">
+						<h2 class="text-3xl dark:text-gray-200 self-start">Generate a QR Code</h2>
+						<form class="mt-6 mb-6 w-3/4 flex flex-col items-center justify-center">
+							<label class="block dark:text-gray-200 self-start" for="url">Website or Page URL</label>
+							<input class="inline-block px-2 py-2 border border-gray-400 rounded-md w-full" type="text" name="url"/>
+							<button class="my-4 py-2 border-2 rounded-md bg-gray-100 border-gray-300 hover:border-sky-400 hover:bg-gray-300 w-full">Generate QR Code</button>
+						</form>
 					</section>
 				</div>
+				@components.Footer()
 			</main>
 		</body>
 	</html>
 	<script>
-        function reloadPage() {
-                setTimeout(function() {
-            window.location.reload();
-        }, 2000);
+        const toggleThemeMode = () => {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
         }
     </script>
 }
