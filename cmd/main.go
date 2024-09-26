@@ -11,6 +11,8 @@ func main() {
 	// initialize config
 	app := internals.Config{Router: router}
 
+	router.SetTrustedProxies(nil)
+
 	// serve static files
 	router.Static("/static", "./static")
 
